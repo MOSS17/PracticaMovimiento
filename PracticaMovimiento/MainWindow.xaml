@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Canvas Name="miCanvas" KeyDown="miCanvas_KeyDown" Focusable="True">
-        <Image Name="imgCat" Source="Cat-Silhouette.png" Width="80" Height="80" Stretch="Uniform" Canvas.Left="356" Canvas.Top="339"/>
+        <Image Name="imgCat" Source="Cat-Silhouette.png" Width="50" Height="50" Stretch="Uniform" Canvas.Left="359" Canvas.Top="359"/>
+        <Image Name="imgCarro" Source="carro.jpg" Width="100" Height="60" Canvas.Left="702" Canvas.Top="125" />
     </Canvas>
 </Window>
