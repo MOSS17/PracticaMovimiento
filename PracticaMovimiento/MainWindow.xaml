@@ -5,9 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PracticaMovimiento"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Canvas Name="miCanvas" KeyDown="miCanvas_KeyDown" Focusable="True">
-        <Image Name="imgCat" Source="Cat-Silhouette.png" Width="50" Height="50" Stretch="Uniform" Canvas.Left="359" Canvas.Top="359"/>
-        <Image Name="imgCarro" Source="carro.jpg" Width="100" Height="60" Canvas.Left="702" Canvas.Top="125" />
+        Title="MainWindow" Height="450" Width="800"
+        >
+    <Canvas>
+        <Canvas Visibility="Visible" Name="miCanvas" KeyDown="miCanvas_KeyDown" Focusable="True">
+            <Image Name="imgCat" Source="Cat-Silhouette.png" Width="90" Height="90" Stretch="UniformToFill" Canvas.Left="327" Canvas.Top="297" RenderTransformOrigin="0.5,0.5"/>
+            <Image Name="imgCarro" Source="carro.jpg" Width="100" Height="60" Stretch="Uniform" Canvas.Left="642" Canvas.Top="114" />
+            <TextBlock x:Name="lblInterseccionX" Canvas.Left="10" TextWrapping="Wrap" Text="No hay intersección en X" Canvas.Top="10"/>
+            <TextBlock x:Name="lblColision" Canvas.Left="10" TextWrapping="Wrap" Text="No hay colisión" Canvas.Top="52"/>
+            <TextBlock x:Name="lblInterseccionY" Canvas.Left="10" TextWrapping="Wrap" Text="No hay intersección en Y" Canvas.Top="31"/>
+        </Canvas>
+        <Canvas Name="canvasGameOver" Visibility="Collapsed">
+            <TextBlock Text="Game Over" Canvas.Left="230" Canvas.Top="154" FontSize="72" Foreground="#FFBF3B3B" />
+        </Canvas>
     </Canvas>
 </Window>

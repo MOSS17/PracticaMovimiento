@@ -25,6 +25,9 @@ namespace PracticaMovimiento
         Stopwatch stopwatch;
         TimeSpan tiempoAnterior;
 
+        enum EstadoJuego { Gameplay, Gameover};
+        EstadoJuego estadoActual = EstadoJuego.Gameplay;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,7 +45,8 @@ namespace PracticaMovimiento
             threadMoverEnemigos.Start();
         }
 
-        void moverEnemigos()
+
+        void actualizar()
         {
             while (true)
             {
@@ -53,15 +57,81 @@ namespace PracticaMovimiento
                     var deltaTime =
                         tiempoActual - tiempoAnterior;
 
-                    double leftCarroActual =
-                        Canvas.GetLeft(imgCarro);
-                    Canvas.SetLeft(
-                        imgCarro, leftCarroActual - (200 * deltaTime.TotalSeconds));
-                    if (Canvas.GetLeft(imgCarro) <= -100)
+                    if (estadoActual == EstadoJuego.Gameplay)
                     {
-                        Canvas.SetLeft(imgCarro, 800);
+                        double leftCarroActual =
+                        Canvas.GetLeft(imgCarro);
+                        Canvas.SetLeft(
+                            imgCarro, leftCarroActual - (20 * deltaTime.TotalSeconds));
+                        if (Canvas.GetLeft(imgCarro) <= -100)
+                        {
+                            Canvas.SetLeft(imgCarro, 800);
+                        }
+
+
+                        //Intersección en X
+                        double xCarro =
+                            Canvas.GetLeft(imgCarro);
+                        double xRana =
+                            Canvas.GetLeft(imgCat);
+                        if (xRana + imgCat.Width >= xCarro &&
+                            xRana <= xCarro + imgCarro.Width)
+                        {
+                            lblInterseccionX.Text =
+                            "SI HAY INTERSECCION EN X!!!";
+                        }
+                        else
+                        {
+                            lblInterseccionX.Text =
+                            "No hay interseccion en X";
+                        }
+                        double yCarro =
+                            Canvas.GetTop(imgCarro);
+                        double yRana =
+                            Canvas.GetTop(imgCat);
+                        if (yRana + imgCat.Height >= yCarro &&
+                            yRana <= yCarro + imgCarro.Height)
+                        {
+                            lblInterseccionY.Text =
+                                "SI HAY INTERSECCION EN Y!!!";
+                        }
+                        else
+                        {
+                            lblInterseccionY.Text =
+                                "No hay interseccion en Y";
+                        }
+
+                        if (xRana + imgCat.Width >= xCarro &&
+                            xRana <= xCarro + imgCarro.Width &&
+                            yRana + imgCat.Height >= yCarro &&
+                            yRana <= yCarro + imgCarro.Height)
+                        {
+                            lblColision.Text =
+                                "HAY COLISION!!!";
+                            estadoActual = EstadoJuego.Gameover;
+                            miCanvas.Visibility = Visibility.Collapsed;
+                            canvasGameOver.Visibility =
+                                Visibility.Visible;
+                        }
+                        else
+                        {
+                            lblColision.Text =
+                                "No hay colision";
+                        }
                     }
+                    else if (estadoActual == EstadoJuego.Gameover)
+                    {
+
+                    }
+
+
+
+
+
+
                     tiempoAnterior = tiempoActual;
+
+
                 }
                 );
             }
